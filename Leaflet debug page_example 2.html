@@ -75,22 +75,11 @@ All Software Companies  </title>
     
     
     
-    for (var i = 0; i < lat.length; i++) {
-      var a = "Company";
-      var title = a;
-      var marker = L.marker(new L.LatLng(lat[i], lng[i]), {
-        title: title
-              }
-                           );
-      marker.bindPopup(title);
-      markers.addLayer(marker ,{ "icon-image":"F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\3.png" });
-    }
-    
-    map.addLayer(markers);
+  
+  
 
 
 // Test.html contents here
-// // Define polyline options
    var featureGroup = L.featureGroup().addTo(map);
 
 
@@ -111,9 +100,32 @@ All Software Companies  </title>
       console.log("Longitude : "+latlngs[i].lng);
          }
        }
-      
+        for (var i = 0; i < lat.length; i++) {
+      var a = "Company";
+      var title = a;
+     /* console.log("\nLattitude  :\n");
+      console.log(" 1st : "+parseFloat(lat[i])+","+latlngs[0].lat);
+      console.log(" 2nd : "+parseFloat(lat[i])+","+latlngs[2].lat);
+
+      console.log("\nLongitude  :\n");
+      console.log(" 3rd : "+parseFloat(lng[i])+","+latlngs[0].lng);
+      console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);*/
+
+        if((parseFloat(lat[i])>=latlngs[0].lat&&parseFloat(lat[i])<=latlngs[2].lat)&&(parseFloat(lng[i])>=latlngs[0].lng&&parseFloat(lng[i])<=latlngs[2].lng))
+      {
+
+        console.log ( " I am here" );
+        var marker = L.marker(new L.LatLng(lat[i], lng[i]), {title: title});
+      marker.bindPopup(title);
+      markers.addLayer(marker ,{ "icon-image":"F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\3.png" });
+       
+    }
+  }
+     map.addLayer(markers);
 
   });
+
+  
 
   </script>
   
