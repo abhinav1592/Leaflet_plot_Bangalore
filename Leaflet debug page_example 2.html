@@ -10,6 +10,7 @@ All Software Companies  </title>
   <link rel="stylesheet" href="./Leaflet debug page_example 2_files/leaflet.css">
   <script src="./Leaflet debug page_example 2_files/leaflet.js">
   </script>
+  <link rel="stylesheet" href="./Leaflet debug page_example 2_files/leaflet.draw.css">
   <script src="./Leaflet debug page_example 2_files/leaflet.draw.js">
   </script>
   <style type="text/css">
@@ -86,6 +87,34 @@ All Software Companies  </title>
     }
     
     map.addLayer(markers);
+
+
+// Test.html contents here
+// // Define polyline options
+   var featureGroup = L.featureGroup().addTo(map);
+
+
+  var drawControl = new L.Control.Draw({
+    edit: {
+      featureGroup: featureGroup
+    }
+  }).addTo(map);
+
+  map.on('draw:created', function(e) {
+      
+      featureGroup.addLayer(e.layer);
+      
+        latlngs = e.layer.getLatLngs();
+        for (var i = 0; i < latlngs.length; i++) {
+            {
+      console.log("\nLattitude : "+latlngs[i].lat);
+      console.log("Longitude : "+latlngs[i].lng);
+         }
+       }
+      
+
+  });
+
   </script>
   
   
