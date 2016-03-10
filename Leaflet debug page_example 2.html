@@ -1,135 +1,212 @@
 <!DOCTYPE html>
 <!-- saved from url=(0091)http://leaflet.github.io/Leaflet.markercluster/example/marker-clustering-realworld.388.html -->
 <html>
-  
-  <head>
+
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>
-All Software Companies  </title>
-  
-  <link rel="stylesheet" href="./Leaflet debug page_example 2_files/leaflet.css">
-  <script src="./Leaflet debug page_example 2_files/leaflet.js">
-  </script>
-  <link rel="stylesheet" href="./Leaflet debug page_example 2_files/leaflet.draw.css">
-  <script src="./Leaflet debug page_example 2_files/leaflet.draw.js">
-  </script>
-  <style type="text/css">
-  </style>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./Leaflet debug page_example 2_files/screen.css">
-  
-  <link rel="stylesheet" href="./Leaflet debug page_example 2_files/MarkerCluster.css">
-  <link rel="stylesheet" href="./Leaflet debug page_example 2_files/MarkerCluster.Default.css">
-  <script src="./Leaflet debug page_example 2_files/leaflet.markercluster-src.js">
-  </script>
-  <script src="./Leaflet debug page_example 2_files/realworld.388.js">
-  </script>
-  
-  </head>
-  
-  <body>
-    
-    <div id="map" class="leaflet-container leaflet-fade-anim" tabindex="0" style="width: 1250px; height: 760px position: center;" >
-      <div class="leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);">
-        <div class="leaflet-tile-pane">
-          <div class="leaflet-layer">
-            <div class="leaflet-tile-container leaflet-zoom-animated">
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <title>
+        All Software Companies </title>
+
+    <link rel="stylesheet" href="./Leaflet debug page_example 2_files/leaflet.css">
+    <script src="./Leaflet debug page_example 2_files/leaflet.js">
+    </script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.js'></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Leaflet debug page_example 2_files/screen.css">
+
+    <link rel="stylesheet" href="./Leaflet debug page_example 2_files/MarkerCluster.css">
+    <link rel="stylesheet" href="./Leaflet debug page_example 2_files/MarkerCluster.Default.css">
+    <script src="./Leaflet debug page_example 2_files/leaflet.markercluster-src.js">
+    </script>
+    <script src="./Leaflet debug page_example 2_files/all_in_one_data.js">
+    </script>
+
+</head>
+
+<body>
+
+    <div id="map" class="leaflet-container leaflet-fade-anim" tabindex="0" style="width: 1290px; height: 890px position: center;">
+        <div class="leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);">
+            <div class="leaflet-tile-pane">
+                <div class="leaflet-layer">
+                    <div class="leaflet-tile-container leaflet-zoom-animated">
+                    </div>
+
+                </div>
             </div>
-       
-          </div>
-        </div>
-        <div class="leaflet-objects-pane">
-         
-          <div class="leaflet-overlay-pane">
-            <svg class="leaflet-zoom-animated" width="2000" height="1200" viewBox="-500 -600 2000 1800" style="transform: translate3d(-500px, -600px, 0px);">
+            <div class="leaflet-objects-pane">
+
+                <div class="leaflet-overlay-pane">
+                    <svg class="leaflet-zoom-animated" width="2000" height="1200" viewBox="-500 -600 2000 1800" style="transform: translate3d(-500px, -600px, 0px);">
             </svg>
-          </div>
+                </div>
 
 
-        
-          <div class="leaflet-popup-pane">
-          </div>
+
+                <div class="leaflet-popup-pane">
+                </div>
+            </div>
         </div>
-      </div>
-     
-  </div>
-  <span>
+
+    </div>
+    <span>
     Mouse over a cluster to see the bounds of its children and click a cluster to zoom to those bounds
   </span>
-  <script type="text/javascript">
-    var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      maxZoom: 20,
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
-    }
-                           ),
-        latlng = L.latLng(12.9667, 77.5667);
-    
-    var map = L.map('map', {
-      center: latlng,
-      zoom: 10,
-      layers: [tiles]
-    }
-                   );
-    
-    var markers = L.markerClusterGroup();
-    
-    
-    
-  
-  
+    <script type="text/javascript">
+        var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
+            }),
+            latlng = L.latLng(12.9667, 77.5667);
+
+        var map = L.map('map', {
+            center: latlng,
+            zoom: 12,
+            layers: [tiles]
+        });
+
+        var markers = L.markerClusterGroup();
+
+        
 
 
-// Test.html contents here
-   var featureGroup = L.featureGroup().addTo(map);
+        // Test.html contents here
+        var featureGroup = L.featureGroup().addTo(map);
 
 
-  var drawControl = new L.Control.Draw({
-    edit: {
-      featureGroup: featureGroup
-    }
-  }).addTo(map);
+        var drawControl = new L.Control.Draw({
+            edit: {
+                featureGroup: featureGroup
+            }
+        }).addTo(map);
 
-  map.on('draw:created', function(e) {
-      
-      featureGroup.addLayer(e.layer);
-      
-        latlngs = e.layer.getLatLngs();
-        for (var i = 0; i < latlngs.length; i++) {
-            {
-      console.log("\nLattitude : "+latlngs[i].lat);
-      console.log("Longitude : "+latlngs[i].lng);
-         }
-       }
-        for (var i = 0; i < lat.length; i++) {
-      var a = "Company";
-      var title = a;
-     /* console.log("\nLattitude  :\n");
-      console.log(" 1st : "+parseFloat(lat[i])+","+latlngs[0].lat);
-      console.log(" 2nd : "+parseFloat(lat[i])+","+latlngs[2].lat);
+        map.on('draw:created', function(e) {
 
-      console.log("\nLongitude  :\n");
-      console.log(" 3rd : "+parseFloat(lng[i])+","+latlngs[0].lng);
-      console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);*/
+            featureGroup.addLayer(e.layer);
 
-        if((parseFloat(lat[i])>=latlngs[0].lat&&parseFloat(lat[i])<=latlngs[2].lat)&&(parseFloat(lng[i])>=latlngs[0].lng&&parseFloat(lng[i])<=latlngs[2].lng))
-      {
+            latlngs = e.layer.getLatLngs();
+            for (var i = 0; i < latlngs.length; i++) {
+                {
+                    console.log("\nLattitude : " + latlngs[i].lat);
+                    console.log("Longitude : " + latlngs[i].lng);
+                }
+            }
 
-        console.log ( " I am here" );
-        var marker = L.marker(new L.LatLng(lat[i], lng[i]), {title: title});
-      marker.bindPopup(title);
-      markers.addLayer(marker ,{ "icon-image":"F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\3.png" });
-       
-    }
-  }
-     map.addLayer(markers);
+         // ================ SOFTWARE COMPANIES ======================== //
 
-  });
+            for (var i = 0; i < software_lat.length; i++) {
+                var a = "Software_Company";
+                var title = a;
+                /* console.log("\nLattitude  :\n");
+                 console.log(" 1st : "+parseFloat(lat[i])+","+latlngs[0].lat);
+                 console.log(" 2nd : "+parseFloat(lat[i])+","+latlngs[2].lat);
+                 console.log("\nLongitude  :\n");
+                 console.log(" 3rd : "+parseFloat(lng[i])+","+latlngs[0].lng);
+                 console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);*/
 
-  
+                if ((parseFloat(software_lat[i]) >= latlngs[0].lat && parseFloat(software_lat[i]) <= latlngs[2].lat) && (parseFloat(software_lng[i]) >= latlngs[0].lng && parseFloat(software_lng[i]) <= latlngs[2].lng)) {
 
-  </script>
-  
-  
-  </body>
-  
+                    console.log(" I am here");
+                    var marker = L.marker(new L.LatLng(software_lat[i], software_lng[i]), {
+                        title: title
+                    });
+                    marker.bindPopup(title);
+                    markers.addLayer(marker, {
+                        "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\3.png"
+                    });
+
+                }
+            }
+
+            // ================ RESTAURANTS ======================== //
+
+            for (var i = 0; i < food_lat.length; i++) {
+                var a = "RESTAURANT";
+                var title = a;
+                /* console.log("\nLattitude  :\n");
+                 console.log(" 1st : "+parseFloat(lat[i])+","+latlngs[0].lat);
+                 console.log(" 2nd : "+parseFloat(lat[i])+","+latlngs[2].lat);
+                 console.log("\nLongitude  :\n");
+                 console.log(" 3rd : "+parseFloat(lng[i])+","+latlngs[0].lng);
+                 console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);*/
+
+                if ((parseFloat(food_lat[i]) >= latlngs[0].lat && parseFloat(food_lat[i]) <= latlngs[2].lat) && (parseFloat(food_lng[i]) >= latlngs[0].lng && parseFloat(food_lng[i]) <= latlngs[2].lng)) {
+
+                    console.log(" I am here");
+                    var marker = L.marker(new L.LatLng(food_lat[i], food_lng[i]), {
+                        title: title
+                    });
+                    marker.bindPopup(title);
+                    markers.addLayer(marker, {
+                        "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\2.png"
+                    });
+
+                }
+            }
+            
+              // ================ SCHOOLS ======================== //
+
+            for (var i = 0; i < schools_lat.length; i++) {
+                var a = "SCHOOLS";
+                var title = a;
+                /* console.log("\nLattitude  :\n");
+                 console.log(" 1st : "+parseFloat(lat[i])+","+latlngs[0].lat);
+                 console.log(" 2nd : "+parseFloat(lat[i])+","+latlngs[2].lat);
+                 console.log("\nLongitude  :\n");
+                 console.log(" 3rd : "+parseFloat(lng[i])+","+latlngs[0].lng);
+                 console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);*/
+
+                if ((parseFloat(schools_lat[i]) >= latlngs[0].lat && parseFloat(schools_lat[i]) <= latlngs[2].lat) && (parseFloat(schools_lng[i]) >= latlngs[0].lng && parseFloat(schools_lng[i]) <= latlngs[2].lng)) {
+
+                    console.log(" I am here");
+                    var marker = L.marker(new L.LatLng(schools_lat[i], schools_lng[i]), {
+                        title: title
+                    });
+                    marker.bindPopup(title);
+                    markers.addLayer(marker, {
+                        "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\1.png"
+                    });
+
+                }
+            } 
+             
+
+               // ================ COLLEGES ======================== //
+
+            for (var i = 0; i < college_lat.length; i++) {
+                var a = "COLLEGE";
+                var title = a;
+                /* console.log("\nLattitude  :\n");
+                 console.log(" 1st : "+parseFloat(lat[i])+","+latlngs[0].lat);
+                 console.log(" 2nd : "+parseFloat(lat[i])+","+latlngs[2].lat);
+                 console.log("\nLongitude  :\n");
+                 console.log(" 3rd : "+parseFloat(lng[i])+","+latlngs[0].lng);
+                 console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);*/
+
+                if ((parseFloat(college_lat[i]) >= latlngs[0].lat && parseFloat(college_lat[i]) <= latlngs[2].lat) && (parseFloat(college_lng[i]) >= latlngs[0].lng && parseFloat(college_lng[i]) <= latlngs[2].lng)) {
+
+                    console.log(" I am here");
+                    var marker = L.marker(new L.LatLng(college_lat[i], college_lng[i]), {
+                        title: title
+                    });
+                    marker.bindPopup(title);
+                    markers.addLayer(marker, {
+                        "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\1.png"
+                    });
+
+                }
+            } 
+
+            map.addLayer(markers);
+
+        });
+    </script>
+
+
+</body>
+
 </html>
