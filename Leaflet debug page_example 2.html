@@ -1,65 +1,64 @@
 <!DOCTYPE html>
 <!-- saved from url=(0091)http://leaflet.github.io/Leaflet.markercluster/example/marker-clustering-realworld.388.html -->
 <html>
-
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content='initial-scale=1,maximum-scale=1,user-scalable=no' name='viewport'>
+    <title>Project Elective</title>
+                  <!--====================== Adding the main data ===================-->
 
-    <title>
-        All Software Companies </title>
+    <script src="./Leaflet%20debug%20page_example%202_files/mydata/education.js"></script>
+    <script src="./Leaflet%20debug%20page_example%202_files/mydata/entertainment.js"></script>
+    <script src="./Leaflet%20debug%20page_example%202_files/mydata/food.js"></script>
+    <script src="./Leaflet%20debug%20page_example%202_files/mydata/medical.js"></script>
+    <script src="./Leaflet%20debug%20page_example%202_files/mydata/others.js"></script>
+    <script src="./Leaflet%20debug%20page_example%202_files/mydata/stores.js"></script>
+    <script src="./Leaflet%20debug%20page_example%202_files/mydata/travel.js"></script>
+    <script src="./Leaflet%20debug%20page_example%202_files/mydata/utilities.js"></script>
+    <script src="./Leaflet%20debug%20page_example%202_files/mydata/workareas.js"></script>
+          <!--  =====================Main data is above ========================= -->
 
-    <link rel="stylesheet" href="./Leaflet debug page_example 2_files/leaflet.css">
-    <script src="./Leaflet debug page_example 2_files/leaflet.js">
-    </script>
-    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.css' rel='stylesheet' />
+    <link href="./Leaflet debug page_example 2_files/leaflet.css" rel="stylesheet">
+    <script src="./Leaflet%20debug%20page_example%202_files/leaflet.js"></script>
+    <script src="./Leaflet%20debug%20page_example%202_files/pointinapolygon.js"></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.css' rel='stylesheet'>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.3/leaflet.draw.js'></script>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./Leaflet debug page_example 2_files/screen.css">
-
-    <link rel="stylesheet" href="./Leaflet debug page_example 2_files/MarkerCluster.css">
-    <link rel="stylesheet" href="./Leaflet debug page_example 2_files/MarkerCluster.Default.css">
-    <script src="./Leaflet debug page_example 2_files/leaflet.markercluster-src.js">
-    </script>
-    <script src="./Leaflet debug page_example 2_files/all_in_one_data.js">
-    </script>
-
+    
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="./Leaflet debug page_example 2_files/screen.css" rel="stylesheet">
+    <link href="./Leaflet debug page_example 2_files/MarkerCluster.css" rel="stylesheet">
+    <link href="./Leaflet debug page_example 2_files/MarkerCluster.Default.css"rel="stylesheet">
+    <script src="./Leaflet%20debug%20page_example%202_files/leaflet.markercluster-src.js"></script>
+     
 </head>
-
 <body>
-
-    <div id="map" class="leaflet-container leaflet-fade-anim" tabindex="0" style="width: 1290px; height: 890px position: center;">
-        <div class="leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);">
+    <div class="leaflet-container leaflet-fade-anim" id="map" style=
+    "width: 1290px; height: 890px position: center;" tabindex="0">
+        <div class="leaflet-map-pane" style=
+        "transform: translate3d(0px, 0px, 0px);">
             <div class="leaflet-tile-pane">
                 <div class="leaflet-layer">
                     <div class="leaflet-tile-container leaflet-zoom-animated">
                     </div>
-
                 </div>
             </div>
             <div class="leaflet-objects-pane">
-
                 <div class="leaflet-overlay-pane">
-                    <svg class="leaflet-zoom-animated" width="2000" height="1200" viewBox="-500 -600 2000 1800" style="transform: translate3d(-500px, -600px, 0px);">
-            </svg>
+                    <svg class="leaflet-zoom-animated" height="1200" style=
+                    "transform: translate3d(-500px, -600px, 0px);" viewbox=
+                    "-500 -600 2000 1800" width="2000"></svg>
                 </div>
-
-
-
-                <div class="leaflet-popup-pane">
-                </div>
+                <div class="leaflet-popup-pane"></div>
             </div>
         </div>
+    </div><br><span>Mouse over a cluster to see the bounds of its children and click a cluster to zoom to those bounds 
+    <button id="buttonp" onclick="myFunction()"><span>Press to Clear Markers</span></button></span> 
+    
 
-    </div>
-    <span>
-    Mouse over a cluster to see the bounds of its children and click a cluster to zoom to those bounds
-  </span>
     <script type="text/javascript">
         var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap<\/a> contributors, Points &copy 2012 LINZ'
             }),
             latlng = L.latLng(12.9667, 77.5667);
 
@@ -70,10 +69,219 @@
         });
 
         var markers = L.markerClusterGroup();
+         var markers1 = L.markerClusterGroup();
 
-        
+        var LeafIcon = L.Icon.extend({
+            options: {
+                shadowUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\marker-shadow.png',
+                iconSize:     [30, 50],
+                shadowSize:   [10, 10],
+            }
+        });
+    var schoolsIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\schools.png'}),
+     librariesIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\libraries.png'}),
+     collegesIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\colleges.png'});
+      
+
+    var banksIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\banks.png'}),
+         softwaresIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\softwares.png'});
 
 
+   var physiotherapistIcon =  new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\physiotherapist.png'}),
+       doctors_and_clinicsIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\doctors.png'}),
+       hospitalsIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\health_medical.png'}),
+       dentistsIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\dental.png'});
+
+
+   var restaurantsIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\restaurants.png'}),
+       cafeIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\cafe.png'}),
+       mealDeliveryIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\meal_delivery.png'});
+
+
+   var parkIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\parks.png'}),
+       museumIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\museums.png'}),
+        bowlalleyIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\bowlalley.png'}),
+         artgalleryIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\arts-crafts.png'}),
+       nightClubIcon = new LeafIcon({iconUrl: 'F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\images\\clubs.png'});
+               
+                        var ctr_schools = 0;
+                        var ctr_colleges= 0;
+                        var ctr_library = 0;
+
+                        var ctr_softwares= 0;
+                        var ctr_banks = 0;
+
+                        var ctr_phsyio = 0;
+                        var ctr_hospitals = 0;
+                        var ctr_doctors_and_clinics = 0;
+                        var ctr_dentists = 0;
+
+                        var ctr_restaurants = 0;
+                        var ctr_cafe = 0;
+                        var ctr_mealdelivery = 0;
+
+                        var ctr_parks = 0;
+                        var ctr_museum = 0;
+                        var ctr_bowlingalley = 0;
+                        var ctr_artgallery = 0;
+                        var ctr_nightclubs = 0;
+
+
+                        var str_edu = "";
+ 
+        var featureGroup = L.featureGroup().addTo(map);
+
+        var created_once = false;
+
+        if(created_once==false)
+         {var drawControl = new L.Control.Draw({
+            edit: {
+                featureGroup: featureGroup
+            }
+        }).addTo(map);
+              created_once = true;
+        }
+
+      function f_edu () {
+                        // body...  
+        // Test.html contents here
+        map.on('draw:created', function(e) {
+
+                    featureGroup.addLayer(e.layer);
+
+                    latlngs = e.layer.getLatLngs();
+                    var polygon_x = [];
+                    var polygon_y = [];
+                    console.log("Coordinates of Polygon created!\n");
+                    for (var i = 0; i < latlngs.length; i++) {
+
+                        console.log("\nLattitude : " + latlngs[i].lat);
+                        console.log("Longitude : " + latlngs[i].lng);
+                        polygon_x.unshift(latlngs[i].lat);
+                        polygon_y.unshift(latlngs[i].lng)
+
+                    }
+                    
+             
+                    console.log("\n========================\n");
+                      for (var i = 0;i < polygon_x.length; i++){
+                          console.log("Lattitude : " + polygon_x[i]);
+                      //  console.log("Longitude : " + polygon_y[j]);
+                      }
+                      for(var j=0  ; j < polygon_y.length ; j++){
+                         console.log("Longitude : " + polygon_y[j]);
+                      }
+
+                    console.log("\n========================\n");
+                   //  console.log("schools_lat.length  : "+ schools_lat.length);
+
+                 
+
+                      
+
+                 
+                        // ================ SCHOOLS ======================== //
+                     
+                        for (var i = 0; i < schools_lat.length; i++) {
+                            var a = "SCHOOL";
+                            var title = a;
+                            /* console.log("\nLattitude  :\n");
+                 console.log(" 1st : "+parseFloat(lat[i])+","+latlngs[0].lat);
+                 console.log(" 2nd : "+parseFloat(lat[i])+","+latlngs[2].lat);
+                 console.log("\nLongitude  :\n");
+                 console.log(" 3rd : "+parseFloat(lng[i])+","+latlngs[0].lng);
+                 console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);
+             
+                if ((parseFloat(schools_lat[i]) >= latlngs[0].lat && parseFloat(schools_lat[i]) <= latlngs[2].lat) && (parseFloat(schools_lng[i]) >= latlngs[0].lng && parseFloat(schools_lng[i]) <= latlngs[2].lng))  
+                             console.log(" I am here in schools array ");*/
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(schools_lat[i]), parseFloat(schools_lng[i]))==true){
+                           ctr_schools++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(schools_lat[i], schools_lng[i]), {
+                                title: title,
+                                icon: schoolsIcon
+
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\1.png"
+                                });
+
+                            }
+                        }
+                       
+                        map.addLayer(markers);
+      
+
+                // ================ UNIVERSITIES AND COLLEGES ======================== //
+                        
+                        for (var i = 0; i < university_and_colleges_lat.length; i++) {
+                            var a = "COLLEGE or UNIVERSITY";
+                            var title = a;
+                         
+                           /*  console.log(" I am here in schools array ");*/
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(university_and_colleges_lat[i]), parseFloat(university_and_colleges_lng[i]))==true){
+                             ctr_colleges++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(university_and_colleges_lat[i], university_and_colleges_lng[i]), {
+                                title: title,
+                                icon: collegesIcon
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\2.png"
+                                });
+
+                            }
+                        }
+                       map.addLayer(markers);
+
+
+
+
+                // ================ LIBRARIES ======================== //
+                        
+                        for (var i = 0; i < library_lat.length; i++) {
+                            var a = "LIBRARY";
+                            var title = a;
+                        
+                           /*  console.log(" I am here in schools array ");*/
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(library_lat[i]), parseFloat(library_lng[i]))==true){
+                                       ctr_library++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(library_lat[i], library_lng[i]), {
+                                title: title,
+                                icon: librariesIcon
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\4.png"
+                                });
+
+                            }
+                        }
+                       map.addLayer(markers);
+
+
+                       
+                       document.getElementById("buttonp").onclick = function() {myFunction()};
+                         function myFunction() {
+                             // body...
+                             markers.clearLayers();
+                         }
+          
+                      /*  document.getElementById("getCount").onclick = function(){myFunction2()};*/
+                     
+            
+
+                  });
+  }
+  
+ 
+  ///////////////////////////// WORKAREAS/////////////////////////////////////////////////////////////////
+           
+   function f_work () {
+                        // body...  
         // Test.html contents here
         var featureGroup = L.featureGroup().addTo(map);
 
@@ -84,129 +292,902 @@
             }
         }).addTo(map);
 
+
         map.on('draw:created', function(e) {
 
-            featureGroup.addLayer(e.layer);
+                    featureGroup.addLayer(e.layer);
 
-            latlngs = e.layer.getLatLngs();
-            for (var i = 0; i < latlngs.length; i++) {
-                {
-                    console.log("\nLattitude : " + latlngs[i].lat);
-                    console.log("Longitude : " + latlngs[i].lng);
-                }
-            }
+                    latlngs = e.layer.getLatLngs();
+                    var polygon_x = [];
+                    var polygon_y = [];
+                    console.log("Coordinates of Polygon created!\n");
+                    for (var i = 0; i < latlngs.length; i++) {
 
-         // ================ SOFTWARE COMPANIES ======================== //
+                        console.log("\nLattitude : " + latlngs[i].lat);
+                        console.log("Longitude : " + latlngs[i].lng);
+                        polygon_x.unshift(latlngs[i].lat);
+                        polygon_y.unshift(latlngs[i].lng)
 
-            for (var i = 0; i < software_lat.length; i++) {
-                var a = "Software_Company";
-                var title = a;
-                /* console.log("\nLattitude  :\n");
-                 console.log(" 1st : "+parseFloat(lat[i])+","+latlngs[0].lat);
-                 console.log(" 2nd : "+parseFloat(lat[i])+","+latlngs[2].lat);
-                 console.log("\nLongitude  :\n");
-                 console.log(" 3rd : "+parseFloat(lng[i])+","+latlngs[0].lng);
-                 console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);*/
-
-                if ((parseFloat(software_lat[i]) >= latlngs[0].lat && parseFloat(software_lat[i]) <= latlngs[2].lat) && (parseFloat(software_lng[i]) >= latlngs[0].lng && parseFloat(software_lng[i]) <= latlngs[2].lng)) {
-
-                    console.log(" I am here");
-                    var marker = L.marker(new L.LatLng(software_lat[i], software_lng[i]), {
-                        title: title
-                    });
-                    marker.bindPopup(title);
-                    markers.addLayer(marker, {
-                        "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\3.png"
-                    });
-
-                }
-            }
-
-            // ================ RESTAURANTS ======================== //
-
-            for (var i = 0; i < food_lat.length; i++) {
-                var a = "RESTAURANT";
-                var title = a;
-                /* console.log("\nLattitude  :\n");
-                 console.log(" 1st : "+parseFloat(lat[i])+","+latlngs[0].lat);
-                 console.log(" 2nd : "+parseFloat(lat[i])+","+latlngs[2].lat);
-                 console.log("\nLongitude  :\n");
-                 console.log(" 3rd : "+parseFloat(lng[i])+","+latlngs[0].lng);
-                 console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);*/
-
-                if ((parseFloat(food_lat[i]) >= latlngs[0].lat && parseFloat(food_lat[i]) <= latlngs[2].lat) && (parseFloat(food_lng[i]) >= latlngs[0].lng && parseFloat(food_lng[i]) <= latlngs[2].lng)) {
-
-                    console.log(" I am here");
-                    var marker = L.marker(new L.LatLng(food_lat[i], food_lng[i]), {
-                        title: title
-                    });
-                    marker.bindPopup(title);
-                    markers.addLayer(marker, {
-                        "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\2.png"
-                    });
-
-                }
-            }
-            
-              // ================ SCHOOLS ======================== //
-
-            for (var i = 0; i < schools_lat.length; i++) {
-                var a = "SCHOOLS";
-                var title = a;
-                /* console.log("\nLattitude  :\n");
-                 console.log(" 1st : "+parseFloat(lat[i])+","+latlngs[0].lat);
-                 console.log(" 2nd : "+parseFloat(lat[i])+","+latlngs[2].lat);
-                 console.log("\nLongitude  :\n");
-                 console.log(" 3rd : "+parseFloat(lng[i])+","+latlngs[0].lng);
-                 console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);*/
-
-                if ((parseFloat(schools_lat[i]) >= latlngs[0].lat && parseFloat(schools_lat[i]) <= latlngs[2].lat) && (parseFloat(schools_lng[i]) >= latlngs[0].lng && parseFloat(schools_lng[i]) <= latlngs[2].lng)) {
-
-                    console.log(" I am here");
-                    var marker = L.marker(new L.LatLng(schools_lat[i], schools_lng[i]), {
-                        title: title
-                    });
-                    marker.bindPopup(title);
-                    markers.addLayer(marker, {
-                        "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\1.png"
-                    });
-
-                }
-            } 
+                    }
+                    
              
+                    console.log("\n========================\n");
+                      for (var i = 0;i < polygon_x.length; i++){
+                          console.log("Lattitude : " + polygon_x[i]);
+                      //  console.log("Longitude : " + polygon_y[j]);
+                      }
+                      for(var j=0  ; j < polygon_y.length ; j++){
+                         console.log("Longitude : " + polygon_y[j]);
+                      }
 
-               // ================ COLLEGES ======================== //
+                    console.log("\n========================\n");
+                   //  console.log("schools_lat.length  : "+ schools_lat.length);
 
-            for (var i = 0; i < college_lat.length; i++) {
-                var a = "COLLEGE";
-                var title = a;
-                /* console.log("\nLattitude  :\n");
+                 
+
+                      
+
+                 
+                        // ================ SCHOOLS ======================== //
+                     
+                        for (var i = 0; i < software_lat.length; i++) {
+                            var a = "Software_Company";
+                            var title = a;
+                           
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(software_lat[i]), parseFloat(software_lng[i]))==true){
+                           ctr_softwares++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(software_lat[i], software_lng[i]), {
+                                title: title,
+                                icon: softwaresIcon
+
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\1.png"
+                                });
+
+                            }
+                        }
+                       
+                        map.addLayer(markers);
+      
+
+                // ================ BANKS ======================== //
+                        
+                        for (var i = 0; i < banks_lat.length; i++) {
+                            var a = "Banks";
+                            var title = a;
+                          
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(banks_lat[i]), parseFloat(banks_lng[i]))==true){
+                             ctr_banks++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(banks_lat[i], banks_lng[i]), {
+                                title: title,
+                                icon: banksIcon
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\2.png"
+                                });
+
+                            }
+                        }
+                       map.addLayer(markers);
+
+
+                       document.getElementById("buttonp").onclick = function() {myFunction()};
+                         function myFunction() {
+                             // body...
+                             markers.clearLayers();
+                         }
+          
+                      /*  document.getElementById("getCount").onclick = function(){myFunction2()};*/
+                     
+            
+
+                  });
+  }
+  
+
+  /////////////////////////////  MEDICAL /////////////////////////////////////////////////////////////////
+           
+   function f_med () {
+                        // body...  
+        // Test.html contents here
+        var featureGroup = L.featureGroup().addTo(map);
+
+
+        var drawControl = new L.Control.Draw({
+            edit: {
+                featureGroup: featureGroup
+            }
+        }).addTo(map);
+
+
+        map.on('draw:created', function(e) {
+
+                    featureGroup.addLayer(e.layer);
+
+                    latlngs = e.layer.getLatLngs();
+                    var polygon_x = [];
+                    var polygon_y = [];
+                    console.log("Coordinates of Polygon created!\n");
+                    for (var i = 0; i < latlngs.length; i++) {
+
+                        console.log("\nLattitude : " + latlngs[i].lat);
+                        console.log("Longitude : " + latlngs[i].lng);
+                        polygon_x.unshift(latlngs[i].lat);
+                        polygon_y.unshift(latlngs[i].lng)
+
+                    }
+                    
+             
+                    console.log("\n========================\n");
+                      for (var i = 0;i < polygon_x.length; i++){
+                          console.log("Lattitude : " + polygon_x[i]);
+                      //  console.log("Longitude : " + polygon_y[j]);
+                      }
+                      for(var j=0  ; j < polygon_y.length ; j++){
+                         console.log("Longitude : " + polygon_y[j]);
+                      }
+
+                    console.log("\n========================\n");
+                   //  console.log("schools_lat.length  : "+ schools_lat.length);
+
+                 
+
+                      
+
+                 
+                        // ================ Physiotherapists ======================== //
+                     
+                        for (var i = 0; i < physiotherapists_lat.length; i++) {
+                            var a = "Physiotherapist";
+                            var title = a;
+                       
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(physiotherapists_lat[i]), parseFloat(physiotherapists_lng[i]))==true){
+                           ctr_phsyio++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(physiotherapists_lat[i], physiotherapists_lng[i]), {
+                                title: title,
+                                icon: physiotherapistIcon
+
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\1.png"
+                                });
+
+                            }
+                        }
+                       
+                        map.addLayer(markers);
+      
+
+                // ================ DOCTORS AND CLINICS ======================== //
+                        
+                        for (var i = 0; i < doctors_and_clinics_lat.length; i++) {
+                            var a = "DOCTORS AND CLINICS";
+                            var title = a;
+                           
+                           /*  console.log(" I am here in schools array ");*/
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(doctors_and_clinics_lat[i]), parseFloat(doctors_and_clinics_lng[i]))==true){
+                             ctr_doctors_and_clinics++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(doctors_and_clinics_lat[i], doctors_and_clinics_lng[i]), {
+                                title: title,
+                                icon: doctors_and_clinicsIcon
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\2.png"
+                                });
+
+                            }
+                        }
+                       map.addLayer(markers);
+
+
+                 
+
+                // ================ HOSPITALS ======================== //
+                        
+                        for (var i = 0; i < hospital_lat.length; i++) {
+                            var a = "DOCTORS AND CLINICS";
+                            var title = a;
+                         
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(hospital_lat[i]), parseFloat(hospital_lng[i]))==true){
+                             ctr_hospitals++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(hospital_lat[i], hospital_lng[i]), {
+                                title: title,
+                                icon: hospitalsIcon
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\2.png"
+                                });
+
+                            }
+                        }
+                       map.addLayer(markers);
+
+
+                    
+
+
+                // ================ DENTISTS ======================== //
+                        
+                        for (var i = 0; i < dentist_lat.length; i++) {
+                            var a = "DENTISTS";
+                            var title = a;
+                        
+                           /*  console.log(" I am here in schools array ");*/
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(dentist_lat[i]), parseFloat(dentist_lng[i]))==true){
+                             ctr_dentists++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(dentist_lat[i], dentist_lng[i]), {
+                                title: title,
+                                icon: dentistsIcon
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\2.png"
+                                });
+
+                            }
+                        }
+                       map.addLayer(markers);
+
+
+                       document.getElementById("buttonp").onclick = function() {myFunction()};
+                         function myFunction() {
+                             // body...
+                             markers.clearLayers();
+                         }
+          
+                      /*  document.getElementById("getCount").onclick = function(){myFunction2()};*/
+                     
+            
+
+                  });
+  }
+      //////////////////////////////// FOOD ////////////////////////////////////////////////////
+
+          function f_food() {
+                        // body...  
+        // Test.html contents here
+        map.on('draw:created', function(e) {
+
+                    featureGroup.addLayer(e.layer);
+
+                    latlngs = e.layer.getLatLngs();
+                    var polygon_x = [];
+                    var polygon_y = [];
+                    console.log("Coordinates of Polygon created!\n");
+                    for (var i = 0; i < latlngs.length; i++) {
+
+                        console.log("\nLattitude : " + latlngs[i].lat);
+                        console.log("Longitude : " + latlngs[i].lng);
+                        polygon_x.unshift(latlngs[i].lat);
+                        polygon_y.unshift(latlngs[i].lng)
+
+                    }
+                    
+             
+                    console.log("\n========================\n");
+                      for (var i = 0;i < polygon_x.length; i++){
+                          console.log("Lattitude : " + polygon_x[i]);
+                      //  console.log("Longitude : " + polygon_y[j]);
+                      }
+                      for(var j=0  ; j < polygon_y.length ; j++){
+                         console.log("Longitude : " + polygon_y[j]);
+                      }
+
+                    console.log("\n========================\n");
+                   //  console.log("schools_lat.length  : "+ schools_lat.length);
+
+                 
+
+                      
+
+                 
+                        // ================ RESTAURANTS ======================== //
+                     
+                        for (var i = 0; i < restaurant_lat.length; i++) {
+                            var a = "RESTAURANT";
+                            var title = a;
+                            /* console.log("\nLattitude  :\n");
                  console.log(" 1st : "+parseFloat(lat[i])+","+latlngs[0].lat);
                  console.log(" 2nd : "+parseFloat(lat[i])+","+latlngs[2].lat);
                  console.log("\nLongitude  :\n");
                  console.log(" 3rd : "+parseFloat(lng[i])+","+latlngs[0].lng);
-                 console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);*/
+                 console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);
+             
+                if ((parseFloat(schools_lat[i]) >= latlngs[0].lat && parseFloat(schools_lat[i]) <= latlngs[2].lat) && (parseFloat(schools_lng[i]) >= latlngs[0].lng && parseFloat(schools_lng[i]) <= latlngs[2].lng))  
+                             console.log(" I am here in schools array ");*/
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(restaurant_lat[i]), parseFloat(restaurant_lng[i]))==true){
+                           ctr_restaurants++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(restaurant_lat[i], restaurant_lng[i]), {
+                                title: title,
+                                icon: restaurantsIcon
 
-                if ((parseFloat(college_lat[i]) >= latlngs[0].lat && parseFloat(college_lat[i]) <= latlngs[2].lat) && (parseFloat(college_lng[i]) >= latlngs[0].lng && parseFloat(college_lng[i]) <= latlngs[2].lng)) {
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\1.png"
+                                });
 
-                    console.log(" I am here");
-                    var marker = L.marker(new L.LatLng(college_lat[i], college_lng[i]), {
-                        title: title
-                    });
-                    marker.bindPopup(title);
-                    markers.addLayer(marker, {
-                        "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\1.png"
-                    });
+                            }
+                        }
+                       
+                        map.addLayer(markers);
+      
 
-                }
-            } 
+                // ================ CAFE ======================== //
+                        
+                        for (var i = 0; i < cafe_lat.length; i++) {
+                            var a = "CAFE";
+                            var title = a;
+                            /* console.log("\nLattitude  :\n");
+                 console.log(" 1st : "+parseFloat(lat[i])+","+latlngs[0].lat);
+                 console.log(" 2nd : "+parseFloat(lat[i])+","+latlngs[2].lat);
+                 console.log("\nLongitude  :\n");
+                 console.log(" 3rd : "+parseFloat(lng[i])+","+latlngs[0].lng);
+                 console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);
+             
+                if ((parseFloat(schools_lat[i]) >= latlngs[0].lat && parseFloat(schools_lat[i]) <= latlngs[2].lat) && (parseFloat(schools_lng[i]) >= latlngs[0].lng && parseFloat(schools_lng[i]) <= latlngs[2].lng)) */
+                           /*  console.log(" I am here in schools array ");*/
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(cafe_lat[i]), parseFloat(cafe_lng[i]))==true){
+                             ctr_cafe++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(cafe_lat[i], cafe_lng[i]), {
+                                title: title,
+                                icon: cafeIcon
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\2.png"
+                                });
 
-            map.addLayer(markers);
+                            }
+                        }
+                       map.addLayer(markers);
 
-        });
+
+
+
+                // ================ MEAL DELIVERY ======================== //
+                        
+                        for (var i = 0; i < library_lat.length; i++) {
+                            var a = "MEAL DELIVERY";
+                            var title = a;
+                            /* console.log("\nLattitude  :\n");
+                 console.log(" 1st : "+parseFloat(lat[i])+","+latlngs[0].lat);
+                 console.log(" 2nd : "+parseFloat(lat[i])+","+latlngs[2].lat);
+                 console.log("\nLongitude  :\n");
+                 console.log(" 3rd : "+parseFloat(lng[i])+","+latlngs[0].lng);
+                 console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);
+             
+                if ((parseFloat(schools_lat[i]) >= latlngs[0].lat && parseFloat(schools_lat[i]) <= latlngs[2].lat) && (parseFloat(schools_lng[i]) >= latlngs[0].lng && parseFloat(schools_lng[i]) <= latlngs[2].lng)) */
+                           /*  console.log(" I am here in schools array ");*/
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(meal_delivery_lat[i]), parseFloat(meal_delivery_lng[i]))==true){
+                                       ctr_mealdelivery++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(meal_delivery_lat[i], meal_delivery_lng[i]), {
+                                title: title,
+                                icon: librariesIcon
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\4.png"
+                                });
+
+                            }
+                        }
+                       map.addLayer(markers);
+
+
+                       
+                       document.getElementById("buttonp").onclick = function() {myFunction()};
+                         function myFunction() {
+                             // body...
+                             markers.clearLayers();
+                         }
+          
+                      /*  document.getElementById("getCount").onclick = function(){myFunction2()};*/
+                     
+            
+
+                  });
+  }
+  
+  /////////////////////////////  ENTERTAINMENT /////////////////////////////////////////////////////////////////
+           
+   function f_entertainment () {
+                        // body...  
+        // Test.html contents here
+        var featureGroup = L.featureGroup().addTo(map);
+
+
+        var drawControl = new L.Control.Draw({
+            edit: {
+                featureGroup: featureGroup
+            }
+        }).addTo(map);
+
+
+        map.on('draw:created', function(e) {
+
+                    featureGroup.addLayer(e.layer);
+
+                    latlngs = e.layer.getLatLngs();
+                    var polygon_x = [];
+                    var polygon_y = [];
+                    console.log("Coordinates of Polygon created!\n");
+                    for (var i = 0; i < latlngs.length; i++) {
+
+                        console.log("\nLattitude : " + latlngs[i].lat);
+                        console.log("Longitude : " + latlngs[i].lng);
+                        polygon_x.unshift(latlngs[i].lat);
+                        polygon_y.unshift(latlngs[i].lng)
+
+                    }
+                    
+             
+                    console.log("\n========================\n");
+                      for (var i = 0;i < polygon_x.length; i++){
+                          console.log("Lattitude : " + polygon_x[i]);
+                      //  console.log("Longitude : " + polygon_y[j]);
+                      }
+                      for(var j=0  ; j < polygon_y.length ; j++){
+                         console.log("Longitude : " + polygon_y[j]);
+                      }
+
+                    console.log("\n========================\n");
+                   //  console.log("schools_lat.length  : "+ schools_lat.length);
+
+                 
+
+                      
+
+                 
+                        // ================ Parks ======================== //
+                     
+                        for (var i = 0; i < parks_lat.length; i++) {
+                            var a = "Parks";
+                            var title = a;
+                       
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(parks_lat[i]), parseFloat(parks_lng[i]))==true){
+                           ctr_parks++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(parks_lat[i], parks_lng[i]), {
+                                title: title,
+                                icon: parkIcon
+
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\1.png"
+                                });
+
+                            }
+                        }
+                       
+                        map.addLayer(markers);
+      
+
+                // ================ Bowling Alley ======================== //
+                        
+                        for (var i = 0; i < bowling_alley_lat.length; i++) {
+                            var a = "Bowling";
+                            var title = a;
+                           
+                           /*  console.log(" I am here in schools array ");*/
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(bowling_alley_lat[i]), parseFloat(bowling_alley_lng[i]))==true){
+                             ctr_bowlingalley++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(bowling_alley_lat[i], bowling_alley_lng[i]), {
+                                title: title,
+                                icon: bowlalleyIcon
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\2.png"
+                                });
+
+                            }
+                        }
+                       map.addLayer(markers);
+
+
+                 
+
+                // ================ Art Gallery ======================== //
+                        
+                        for (var i = 0; i < art_gallery_lat.length; i++) {
+                            var a = "Art Gallery";
+                            var title = a;
+                         
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(art_gallery_lat[i]), parseFloat(art_gallery_lng[i]))==true){
+                             ctr_artgallery++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(art_gallery_lat[i], art_gallery_lng[i]), {
+                                title: title,
+                                icon: artgalleryIcon
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\2.png"
+                                });
+
+                            }
+                        }
+                       map.addLayer(markers);
+
+
+                    
+
+
+                // ================ Museum ======================== //
+                        
+                        for (var i = 0; i < dentist_lat.length; i++) {
+                            var a = "Museum";
+                            var title = a;
+                        
+                           /*  console.log(" I am here in schools array ");*/
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(museum_lat[i]), parseFloat(museum_lng[i]))==true){
+                             ctr_museum++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(museum_lat[i], museum_lng[i]), {
+                                title: title,
+                                icon: museumIcon
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\2.png"
+                                });
+
+                            }
+                        }
+                       map.addLayer(markers);
+
+
+                       document.getElementById("buttonp").onclick = function() {myFunction()};
+                         function myFunction() {
+                             // body...
+                             markers.clearLayers();
+                         }
+
+                  // ================ Night Clubs ======================== //
+                        
+                        for (var i = 0; i < night_clubs_lat.length; i++) {
+                            var a = "Night Clubs";
+                            var title = a;
+                        
+                           /*  console.log(" I am here in schools array ");*/
+                       if (pnpoly(latlngs.length, polygon_x, polygon_y, parseFloat(night_clubs_lat[i]), parseFloat(night_clubs_lng[i]))==true){
+                             ctr_nightclubs++;
+                                console.log(" I am here");
+                            var marker = L.marker(new L.LatLng(night_clubs_lat[i], night_clubs_lng[i]), {
+                                title: title,
+                                icon: nightClubIcon
+                              });
+                            marker.bindPopup(title);
+                            markers.addLayer(marker, {
+                                    "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\2.png"
+                                });
+
+                            }
+                        }
+                       map.addLayer(markers);
+
+
+                       document.getElementById("buttonp").onclick = function() {myFunction()};
+                         function myFunction() {
+                             // body...
+                             markers.clearLayers();
+                         }       
+          
+                      /*  document.getElementById("getCount").onclick = function(){myFunction2()};*/
+                     
+            
+
+                  });
+  }
+
+ /////=================================== THIS FUNCTION CHECKS THE SELECTED CATEGORIES ===================// /////////
+                function checkstatus(){
+
+                   var str = "";
+
+
+            for(count=0;count<9;count++){
+                if (MyForm.MyCheckbox[count].checked)
+                    str= str.concat(MyForm.MyCheckbox[count].value+",");
+            }
+
+            var s = " Categories Selected : ";
+            s = s.concat(str);
+            document.getElementById("para").innerHTML = s; 
+
+             if(str.search("education")!=-1){
+               f_edu();
+             document.getElementById("edu").innerHTML += "<hr />"+"Education Category : "+"<br />";
+             document.getElementById("edu").innerHTML+="<input type=\"button\" value=\"Get Education Category Stats\" onclick=\"getCount_edu()\"> <br>"; 
+       
+         }
+
+        if(str.search("food")!=-1){
+            f_food();
+             document.getElementById("food").innerHTML += "<hr />"+"Food Category : "+"<br />";
+             document.getElementById("food").innerHTML+="<input type=\"button\" value=\"Get Food Category Stats\" onclick=\"getCount_food()\"> <br>"; 
+        
+       }
+
+         if(str.search("entertainment")!=-1){
+             f_entertainment();
+             document.getElementById("entertainment").innerHTML += "<hr />"+"Entertainment Category : "+"<br />";
+             document.getElementById("entertainment").innerHTML+="<input type=\"button\" value=\"Get Entertainment Category Stats\" onclick=\"getCount_entertainment()\"> <br>"; 
+        
+       }
+
+         if(str.search("medical")!=-1){
+              f_med();
+          document.getElementById("medical").innerHTML += "<hr />"+"Medical Category : "+"<br />";
+            document.getElementById("medical").innerHTML+="<input type=\"button\" value=\"Get Medical Category Stats\" onclick=\"getCount_medical()\"> <br>"; 
+        
+       }
+
+
+         if(str.search("travel")!=-1){
+        
+       }
+
+
+         if(str.search("workareas")!=-1){
+            f_work();
+          document.getElementById("work").innerHTML += "<hr />"+"Workareas Category : "+"<br />";
+            document.getElementById("work").innerHTML+="<input type=\"button\" value=\"Get WorkArea Category Stats\" onclick=\"getCount_workArea()\"> <br>"; 
+       
+       }
+
+         if(str.search("stores")!=-1){
+        
+       }
+
+         if(str.search("utilities")!=-1){
+        
+       }
+
+         if(str.search("other")!=-1){
+        
+       }
+
+
+
+   }
+
+
+           function getCount_edu(){
+                              
+             var str_edu = "";
+                               console.log("\n School Counter : "+ctr_schools);
+                               console.log("\n College Counter : "+ctr_colleges);
+                               console.log("\n Library Counter : "+ctr_library);
+               str_edu = str_edu.concat("\n School Counter : "+ctr_schools);
+               str_edu = str_edu.concat("\n College Counter : "+ctr_colleges);
+               str_edu = str_edu.concat("\n Library Counter : "+ctr_library);
+         // document.getElementById("result").innerHTML = ;
+           document.getElementById("edu").innerHTML += "<br />"+" ============= Selected Area Stats ============ "+ "<br />" + "\n School Counter : "+ctr_schools + "<br />" + "\n College(or University) Counter : "+ctr_colleges+ "<br />" 
+                  + "\n Library Counter : "+ctr_library + "<br />" + "======================================================= "+"<br />"; 
+                        ctr_schools = 0;
+                        ctr_library = 0;
+                        ctr_colleges = 0;
+
+
+            }
+
+
+             function getCount_workArea(){
+                              
+             var str_work = "";
+                               console.log("\n Software_Company Counter : "+ctr_softwares);
+                               console.log("\n Banks Counter : "+ctr_banks);
+               str_work = str_work.concat("\n Software_Company Counter : "+ctr_softwares);
+               str_work = str_work.concat("\n Banks Counter : "+ctr_banks);
+              
+         // document.getElementById("result").innerHTML = ;
+           document.getElementById("work").innerHTML += "<br />"+" ============= Selected Area Stats ============ "+ "<br />" + "\n Software_Company Counter : "+ctr_softwares + "<br />" + "\n Banks Counter : "+ctr_banks + "<br />" + "======================================================= "+"<br />"; 
+                        ctr_softwares = 0;
+                        ctr_banks = 0;
+                       
+                        }
+
+
+             function getCount_medical(){
+                              
+             var str_med = "";
+                               console.log("\n Hospitals Counter : "+ctr_hospitals);
+                               console.log("\n Doctors(and Clinics) Counter : "+ctr_doctors_and_clinics);
+                               console.log("\n Dentists Counter : "+ctr_dentists);
+                               console.log("\n Physiotherapists Counter : "+ctr_phsyio);
+               str_edu = str_edu.concat("\n Hospitals Counter : "+ctr_hospitals);
+               str_edu = str_edu.concat("\n Doctors(and Clinics) Counter : "+ctr_doctors_and_clinics);
+               str_edu = str_edu.concat("\n Dentists Counter : "+ctr_dentists);
+               str_edu = str_edu.concat("\n Physiotherapists Counter : "+ctr_phsyio);
+         // document.getElementById("result").innerHTML = ;
+           document.getElementById("medical").innerHTML += "<br />"+" ============= Selected Area Stats ============ "+ "<br />" + "\n Hospitals Counter : "+ctr_hospitals + "<br />" + "\n Doctors(and Clinics) Counter : "+ctr_doctors_and_clinics+ "<br />" 
+                  + "\n Dentists Counter : "+ctr_dentists +"<br />" + "\n Physiotherapists Counter : "+ctr_phsyio +"<br />" + "======================================================= "+"<br />"; 
+                        ctr_hospitals = 0;
+                        ctr_doctors_and_clinics = 0;
+                        ctr_dentists = 0;
+                        ctr_phsyio = 0;
+                       
+                        }
+
+
+
+           function getCount_food(){
+                              
+             var str_food = "";
+
+             var s1 = "\n Restaurant Counter : "+ctr_restaurants ;
+             var s2 =   "\n Cafe Counter : "+ctr_cafe ;
+             var s3 = "\n Meal Delivery Counter : "+ctr_mealdelivery;
+             console.log(s1);
+             console.log(s2);
+             console.log(s3);
+             str_food = str_food.concat(s1);
+             str_food = str_food.concat(s2);
+             str_food = str_food.concat(s3);
+
+                             /*  console.log("\n Restaurant Counter : "+ctr_restaurants);
+                               console.log("\n Cafe Counter : "+ctr_cafe);
+                               console.log("\n Meal Delivery Counter : "+ctr_mealdelivery);
+               str_edu = str_edu.concat("\n Restaurant Counter : "+ctr_restaurants);
+               str_edu = str_edu.concat("\n College Counter : "+ctr_colleges);
+               str_edu = str_edu.concat("\n Library Counter : "+ctr_library);*/
+         // document.getElementById("result").innerHTML = ;
+           document.getElementById("food").innerHTML += "<br />"+" ============= Selected Area Stats ============ "+ "<br />" + s1 + "<br />" + s2 + "<br />" 
+                  + s3  + "<br />" + "======================================================= "+"<br />"; 
+                        ctr_restaurants = 0;
+                        ctr_cafe = 0;
+                        ctr_mealdelivery = 0;
+
+
+            }  
+
+
+           function getCount_entertainment(){
+                              
+             var str_entertainment = "";
+
+             var s1 = "\n Parks Counter : "+ctr_parks ;
+             var s2 =   "\n Museum Counter : "+ctr_museum ;
+             var s3 = "\n Art Gallery Counter : "+ctr_artgallery;
+             var s4 = "\n Bowling Alley Counter : "+ctr_bowlingalley;
+             var s5 = "\n Night Clubs Counter : "+ctr_nightclubs;
+             console.log(s1);
+             console.log(s2);
+             console.log(s3);
+             console.log(s4);
+             console.log(s5);
+             str_entertainment = str_entertainment.concat(s1);
+             str_entertainment = str_entertainment.concat(s2);
+             str_entertainment = str_entertainment.concat(s3);
+             str_entertainment = str_entertainment.concat(s4);
+             str_entertainment = str_entertainment.concat(s5);
+
+                             /*  console.log("\n Restaurant Counter : "+ctr_restaurants);
+                               console.log("\n Cafe Counter : "+ctr_cafe);
+                               console.log("\n Meal Delivery Counter : "+ctr_mealdelivery);
+               str_edu = str_edu.concat("\n Restaurant Counter : "+ctr_restaurants);
+               str_edu = str_edu.concat("\n College Counter : "+ctr_colleges);
+               str_edu = str_edu.concat("\n Library Counter : "+ctr_library);*/
+         // document.getElementById("result").innerHTML = ;
+           document.getElementById("entertainment").innerHTML += "<br />"+" ============= Selected Area Stats ============ "+ "<br />" + s1 + "<br />" + s2 + "<br />" + s3  + "<br />" + s4  + "<br />" + s5  + "<br />" +"======================================================= "+"<br />"; 
+                        ctr_parks = 0;
+                        ctr_museum = 0;
+                        ctr_bowlingalley = 0;
+                        ctr_bowlingalley = 0;
+                        ctr_nightclubs =0;
+
+
+            }                    
+
+
     </script>
+<hr>
 
+ <script language="javascript">
+       
+</script>
+
+<p>Please Select the categories</p>
+    <form name="MyForm" >
+
+
+
+Education: &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="MyCheckbox" value="education"  /><br />
+
+Food: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="MyCheckbox" value="food" /><br /> 
+
+Entertainment:<input type="checkbox" name="MyCheckbox" value="entertainment"  /><br /> 
+
+Medical: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="MyCheckbox" value="medical"  /><br /> 
+
+Travel:&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="MyCheckbox" value="travel"  /><br /> 
+
+Workareas: &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="MyCheckbox" value="workareas"  /><br /> 
+
+Stores: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="MyCheckbox" value="stores"  /><br /> 
+
+Utilities: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="MyCheckbox" value="utilities"  /><br /> 
+
+Others: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="MyCheckbox" value="others"  /><br /> 
+
+
+
+
+<input type="button" value="Submit your choices" onclick="checkstatus()"><br>
+
+
+<hr>
+</form>
+
+<p id="para"></p>
+
+<p id="edu"></p>
+
+<p id="food"></p>
+
+<p id="entertainment"></p>
+
+<p id="medical"></p>
+
+<p id="travel"></p>
+
+<p id="work"></p>
+
+<p id="stores"></p>
+
+<p id="utilities"></p>
+
+<p id="others"></p>
+<hr>
 
 </body>
-
 </html>
+
+
+<!-- temp data : 
+
+                        // ================ RESTAURANTS ======================== //
+                   
+                                    for (var i = 0; i < food_lat.length; i++) {
+                                        var a = "RESTAURANT";
+                                        var title = a;
+                                        /* console.log("\nLattitude  :\n");
+                                         console.log(" 1st : "+parseFloat(lat[i])+","+latlngs[0].lat);
+                                         console.log(" 2nd : "+parseFloat(lat[i])+","+latlngs[2].lat);
+                                         console.log("\nLongitude  :\n");
+                                         console.log(" 3rd : "+parseFloat(lng[i])+","+latlngs[0].lng);
+                                         console.log(" 4th : "+parseFloat(lng[i])+","+latlngs[2].lng);
+
+                                        if ((parseFloat(food_lat[i]) >= latlngs[0].lat && parseFloat(food_lat[i]) <= latlngs[2].lat) && (parseFloat(food_lng[i]) >= latlngs[0].lng && parseFloat(food_lng[i]) <= latlngs[2].lng)) {
+
+                                            console.log(" I am here");
+                                            var marker = L.marker(new L.LatLng(food_lat[i], food_lng[i]), {
+                                                title: title
+                                            });
+                                            marker.bindPopup(title);
+                                            markers.addLayer(marker, {
+                                                "icon-image": "F:\\Project Elective - Traffic Modelling\\Leaflet Markercluster\\Leaflet debug page_example 2_files\\2.png"
+                                            });
+
+                                        }
+                                    }
+                     -->
